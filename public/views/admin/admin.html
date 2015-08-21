@@ -1,0 +1,29 @@
+<h1>Admin</h1>
+
+<h2>User List</h2>    
+<table class="table table-striped">
+    <tr>
+        <td>&nbsp;</td>
+        <td><input ng-model="user.username" class="form-control" placeholder="username"/></td>
+        <td><input ng-model="user.password" class="form-control" type="password" placeholder="password"/></td>
+        <td><input ng-model="user.firstName" class="form-control" placeholder="first"/></td>
+        <td><input ng-model="user.lastName" class="form-control" placeholder="last"/></td>
+        <td><input ng-model="user.email" class="form-control" type="email" placeholder="email"/></td>
+        <td><input ng-model="user.roles" class="form-control" placeholder="roles"/></td>
+        <td><button ng-click="add(user)" class="btn btn-primary">&plus;</button>
+        <td><button ng-click="update(user)" class="btn btn-success">&check;</button>
+    </tr>
+        
+    </tr>
+    <tr ng-repeat="user in users">
+        <td>{{user._id}}</td>
+        <td>{{user.username}}</td>
+        <td>&nbsp;</td>
+        <td>{{user.firstName}}</td>
+        <td>{{user.lastName}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.roles}}</td>
+        <td><button ng-click="remove(user)" class="btn btn-danger">X</button>
+        <td><button ng-click="select(user)" class="btn btn-success">...</button>
+    </tr>
+</table>

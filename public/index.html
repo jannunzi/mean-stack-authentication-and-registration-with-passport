@@ -1,26 +1,36 @@
-<link href="css/bootstrap.css" rel="stylesheet"/>
-<script src="js/jquery-1.11.2.js"></script>
-<script src="js/bootstrap.js"></script>
-<script src="js/angular.js"></script>
-<script src="js/angular-route.js"></script>
-<script src="js/app.js"></script>
-<script src="views/login/login.js"></script>
-<script src="views/profile/profile.js"></script>
-<script src="views/nav/nav.js"></script>
-<body ng-app="PassportApp">
-    <div class="container">
-        <nav ng-controller="NavCtrl">
-          <a href="#home">Home</a> |
-          <span ng-show="!currentUser">
-              <a href="#login">Login</a> |
-              <a href="#register">Register</a>
-          </span>
-          <span ng-show="currentUser">
-              <a href="#profile">Profile</a> |
-              <a href="#logout" ng-click="logout()">Logout</a>
-          </span>
-        </nav>
-        <div ng-view>
+<html>
+    <head>
+        <link href="css/bootstrap.css" rel="stylesheet"/>
+        <script src="js/jquery-1.11.2.js"></script>
+        <script src="js/bootstrap.js"></script>
+        <script src="js/angular.js"></script>
+        <script src="js/angular-route.js"></script>
+        <script src="js/app.js"></script>
+        <script src="views/home/home.js"></script>
+        <script src="views/login/login.js"></script>
+        <script src="views/register/register.js"></script>
+        <script src="views/profile/profile.js"></script>
+        <script src="views/nav/nav.js"></script>
+        <script src="views/admin/admin.js"></script>
+    </head>
+    <body ng-app="WhiteBoardApp">
+        <div class="container">
+            <nav ng-controller="NavCtrl">
+              <a href="#home">Home</a> |
+              <span ng-show="!currentUser">
+                  <a href="#login">Login</a> |
+                  <a href="#register">Register</a>
+              </span>
+              <span ng-show="currentUser">
+                  <a href="#profile">Profile</a> |
+                  <span ng-show="currentUser.roles.indexOf('admin') != -1">
+                  <a href="#admin">Admin</a> |
+                  </span>
+                  <a href="#logout" ng-click="logout()">Logout</a>
+              </span>
+            </nav>
+            <div ng-view>
+            </div>
         </div>
-    </div>
-</body>
+    </body>
+</html>
