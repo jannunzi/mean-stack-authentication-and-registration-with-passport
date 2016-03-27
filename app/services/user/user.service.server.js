@@ -181,7 +181,7 @@ module.exports = function(app) {
             .updateUser(req.params.id, newUser)
             .then(
                 function(user){
-                    return findAllUsers();
+                    return userModel.findAllUsers();
                 },
                 function(err){
                     res.status(400).send(err);

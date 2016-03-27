@@ -1,5 +1,9 @@
 <h1>Login</h1>
 
+<div ng-if="error" class="alert alert-danger">
+  {{error}}
+</div>
+
 <input
   ng-model="user.username"
   class="form-control"

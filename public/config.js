@@ -1,40 +1,37 @@
-(function()
-{
-
-
-    angular.module("WhiteBoardApp", ["ngRoute"]);
-    
+(function() {
     angular.module("WhiteBoardApp")
         .config(function($routeProvider, $httpProvider) {
             $routeProvider
               .when('/home', {
-                  templateUrl: 'views/home/home.html',
+                  templateUrl: 'views/home/home.view.html',
                   controller: 'HomeController',
                   resolve: {
                       loggedin: checkCurrentUser
                   }
               })
               .when('/profile', {
-                  templateUrl: 'views/profile/profile.html',
+                  templateUrl: 'views/profile/profile.view.html',
                   controller: 'ProfileCtrl',
                   resolve: {
                       loggedin: checkLoggedin
                   }
               })
               .when('/admin', {
-                  templateUrl: 'views/admin/admin.html',
+                  templateUrl: 'views/admin/admin.view.html',
                   controller: 'AdminController',
                   resolve: {
                       loggedin: checkAdmin
                   }
               })
               .when('/login', {
-                  templateUrl: 'views/login/login.html',
-                  controller: 'LoginCtrl'
+                  templateUrl: 'views/login/login.view.html',
+                  controller: 'LoginCtrl',
+                  controllerAs: 'model'
               })
               .when('/register', {
-                  templateUrl: 'views/register/register.html',
-                  controller: 'RegisterCtrl'
+                  templateUrl: 'views/register/register.view.html',
+                  controller: 'RegisterCtrl',
+                  controllerAs: 'model'
               })
               .otherwise({
                   redirectTo: '/home'

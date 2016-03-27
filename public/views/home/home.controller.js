@@ -6,6 +6,6 @@
     
     function HomeController($scope)
     {
-        $scope.hello = "Hello from home controller";
+
     }
 })();
