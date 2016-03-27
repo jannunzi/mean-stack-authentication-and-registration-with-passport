@@ -38,7 +38,7 @@
     
     $scope.select = function(user)
     {
-        $scope.user = user;
+        $scope.user = angular.copy(user);
     }
   }
 })();
