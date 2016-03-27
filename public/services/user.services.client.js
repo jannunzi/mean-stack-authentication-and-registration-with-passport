@@ -1,6 +1,6 @@
 (function(){
     angular
-        .module("WhiteBoardApp")
+        .module("PassportApp")
         .factory("UserService", UserService);
 
     function UserService($http) {
@@ -16,31 +16,31 @@
         return api;
 
         function logout() {
-            return $http.post("/logout");
+            return $http.post("/api/logout");
         }
 
         function createUser(user) {
-            return $http.post('/rest/user', user);
+            return $http.post('/api/user', user);
         }
 
         function updateUser(userId, user) {
-            return $http.put('/rest/user/'+userId, user);
+            return $http.put('/api/user/'+userId, user);
         }
 
         function deleteUser(userId) {
-            return $http.delete('/rest/user/'+userId);
+            return $http.delete('/api/user/'+userId);
         }
 
         function findAllUsers() {
-            return $http.get("/rest/user");
+            return $http.get("/api/user");
         }
 
         function register(user) {
-            return $http.post("/register", user);
+            return $http.post("/api/register", user);
         }
 
         function login(user) {
-            return $http.post("/login", user);
+            return $http.post("/api/login", user);
         }
     }
 })();

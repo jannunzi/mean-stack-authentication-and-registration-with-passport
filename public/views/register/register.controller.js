@@ -1,7 +1,7 @@
 (function()
 {
     angular
-        .module("WhiteBoardApp")
+        .module("PassportApp")
         .controller("RegisterCtrl", RegisterCtrl);
         
     function RegisterCtrl($scope, $location, $rootScope, UserService)

@@ -1,7 +1,7 @@
 (function()
 {
     angular
-        .module("WhiteBoardApp")
+        .module("PassportApp")
         .controller("NavCtrl", NavCtrl);
     
     function NavCtrl($scope, UserService, $location, $rootScope)

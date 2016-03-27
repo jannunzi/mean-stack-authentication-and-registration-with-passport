@@ -1,5 +1,5 @@
 (function() {
-    angular.module("WhiteBoardApp")
+    angular.module("PassportApp")
         .config(function($routeProvider, $httpProvider) {
             $routeProvider
               .when('/home', {
@@ -42,7 +42,7 @@
     {
         var deferred = $q.defer();
     
-        $http.get('/loggedin').success(function(user)
+        $http.get('/api/loggedin').success(function(user)
         {
             $rootScope.errorMessage = null;
             // User is Authenticated
@@ -61,7 +61,7 @@
     {
         var deferred = $q.defer();
     
-        $http.get('/loggedin').success(function(user)
+        $http.get('/api/loggedin').success(function(user)
         {
             $rootScope.errorMessage = null;
             // User is Authenticated
@@ -86,7 +86,7 @@
     {
         var deferred = $q.defer();
     
-        $http.get('/loggedin').success(function(user)
+        $http.get('/api/loggedin').success(function(user)
         {
             $rootScope.errorMessage = null;
             // User is Authenticated

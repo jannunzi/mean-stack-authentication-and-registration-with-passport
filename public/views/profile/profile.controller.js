@@ -1,7 +1,7 @@
 (function()
 {
     angular
-        .module("WhiteBoardApp")
+        .module("PassportApp")
         .controller('ProfileCtrl', ProfileCtrl);
     
     function ProfileCtrl($scope, UserService)

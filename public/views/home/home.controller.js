@@ -1,7 +1,7 @@
 (function()
 {
     angular
-        .module("WhiteBoardApp")
+        .module("PassportApp")
         .controller("HomeController", HomeController);
     
     function HomeController($scope)
