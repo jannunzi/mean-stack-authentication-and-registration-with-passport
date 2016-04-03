@@ -1,11 +1,11 @@
-var passport      = require('passport');
-var LocalStrategy = require('passport-local').Strategy;
-var mongoose      = require("mongoose");
+var passport       = require('passport');
+var LocalStrategy  = require('passport-local').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+var mongoose       = require("mongoose");
 
 module.exports = function(app) {
 
     var userModel = require("../../models/user/user.model.server.js")();
-    var UserModel = userModel.getMongooseModel();
 
     var auth = authorized;
     app.post  ('/api/login', passport.authenticate('local'), login);
@@ -17,9 +17,57 @@ module.exports = function(app) {
     app.put   ('/api/user/:id', auth, updateUser);
     app.delete('/api/user/:id', auth, deleteUser);
 
+    app.get   ('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
+    app.get   ('/auth/google/callback',
+        passport.authenticate('google', {
+            successRedirect: '/#/profile',
+            failureRedirect: '/#/login'
+        }));
+
+    var googleConfig = {
+        clientID        : process.env.GOOGLE_CLIENT_ID,
+        clientSecret    : process.env.GOOGLE_CLIENT_SECRET,
+        callbackURL     : process.env.GOOGLE_CALLBACK_URL
+    };
+
+    passport.use(new GoogleStrategy(googleConfig, googleStrategy));
     passport.use(new LocalStrategy(localStrategy));
     passport.serializeUser(serializeUser);
     passport.deserializeUser(deserializeUser);
+
+    function googleStrategy(token, refreshToken, profile, done) {
+        userModel
+            .findUserByGoogleId(profile.id)
+            .then(
+                function(user) {
+                    if(user) {
+                        return done(null, user);
+                    } else {
+                        var newGoogleUser = {
+                            lastName: profile.name.familyName,
+                            firstName: profile.name.givenName,
+                            email: profile.emails[0].value,
+                            google: {
+                                id:          profile.id,
+                                token:       token
+                            }
+                        };
+                        return userModel.createUser(newGoogleUser);
+                    }
+                },
+                function(err) {
+                    if (err) { return done(err); }
+                }
+            )
+            .then(
+                function(user){
+                    return done(null, user);
+                },
+                function(err){
+                    if (err) { return done(err); }
+                }
+            );
+    }
 
     function localStrategy(username, password, done) {
         userModel

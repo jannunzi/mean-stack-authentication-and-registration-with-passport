@@ -6,6 +6,10 @@ module.exports = function() {
         {
             username: String,
             password: String,
+            google:   {
+                id:    String,
+                token: String
+            },
             firstName: String,
             lastName: String,
             email: String,
@@ -22,9 +26,14 @@ module.exports = function() {
         createUser: createUser,
         removeUser: removeUser,
         updateUser: updateUser,
+        findUserByGoogleId: findUserByGoogleId,
         getMongooseModel: getMongooseModel
     };
     return api;
+
+    function findUserByGoogleId(googleId) {
+        return UserModel.findOne({'google.id': googleId});
+    }
 
     function updateUser(userId, user) {
         return UserModel.update({_id: userId}, {$set: user});
