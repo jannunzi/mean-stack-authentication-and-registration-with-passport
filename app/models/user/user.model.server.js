@@ -10,6 +10,10 @@ module.exports = function() {
                 id:    String,
                 token: String
             },
+            facebook:   {
+                id:    String,
+                token: String
+            },
             firstName: String,
             lastName: String,
             email: String,
@@ -27,9 +31,14 @@ module.exports = function() {
         removeUser: removeUser,
         updateUser: updateUser,
         findUserByGoogleId: findUserByGoogleId,
+        findUserByFacebookId: findUserByFacebookId,
         getMongooseModel: getMongooseModel
     };
     return api;
+
+    function findUserByFacebookId(facebookId) {
+        return UserModel.findOne({'facebook.id': facebookId});
+    }
 
     function findUserByGoogleId(googleId) {
         return UserModel.findOne({'google.id': googleId});
