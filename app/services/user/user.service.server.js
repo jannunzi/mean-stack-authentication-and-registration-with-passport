@@ -160,7 +160,7 @@ module.exports = function(app) {
     }
 
     function logout(req, res) {
-        req.logOut();
+        req.logout();
         res.send(200);
     }
 
